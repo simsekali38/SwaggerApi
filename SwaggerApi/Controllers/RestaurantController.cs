@@ -13,60 +13,60 @@ namespace SwaggerApi.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class RestaurantController : ControllerBase
     {
         ApplicationDbContext _context;
 
-        public CategoryController(ApplicationDbContext context)
+        public RestaurantController(ApplicationDbContext context)
         {
             _context = context;
         }
-        // GET: api/<CategoryController>
+        // GET: api/<RestaurantController>
         [HttpGet]
-        public IEnumerable<CategoryModel> Get()
+        public IEnumerable<RestaurantModel> Get()
         {
-            return _context.Categories.Where(x => x.IsActive == true);
+            return _context.Restaurants.Where(x => x.IsActive == true);
         }
 
-        // GET api/<CategoryController>/5
+        // GET api/<RestaurantController>/5
         [HttpGet("{id}")]
-        public CategoryModel Get(int id)
+        public RestaurantModel Get(int id)
         {
-            return _context.Categories.FirstOrDefault(s => s.CategoryID == id);
+            return _context.Restaurants.FirstOrDefault(s => s.RestaurantID == id);
         }
 
-        // POST api/<CategoryController>
+        // POST api/<RestaurantController>
         [HttpPost]
-        public void Post([FromBody] CategoryModel model)
+        public void Post([FromBody] RestaurantModel model)
         {
             if (model != null)
             {
-                _context.Categories.Add(model);
+                _context.Restaurants.Add(model);
                 _context.SaveChanges();
             }
         }
 
-        // PUT api/<CategoryController>/5
+        // PUT api/<RestaurantController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] CategoryModel value)
+        public void Put(int id, [FromBody] RestaurantModel value)
         {
-            var data = _context.Categories.FirstOrDefault(s => s.CategoryID == id);
+            var data = _context.Restaurants.FirstOrDefault(s => s.RestaurantID == id);
             if (data != null)
             {
-                _context.Entry<CategoryModel>(data).CurrentValues.SetValues(value);
+                _context.Entry<RestaurantModel>(data).CurrentValues.SetValues(value);
                 _context.SaveChanges();
             }
-          
+
         }
 
-        // DELETE api/<CategoryController>/5
+        // DELETE api/<RestaurantController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var data = _context.Categories.FirstOrDefault(s => s.CategoryID == id);
+            var data = _context.Restaurants.FirstOrDefault(s => s.RestaurantID == id);
             if (data != null)
             {
-                _context.Categories.Remove(data);
+                _context.Restaurants.Remove(data);
                 _context.SaveChanges();
             }
         }

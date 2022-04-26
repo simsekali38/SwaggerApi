@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SwaggerApi.IdentityAuth;
+using SwaggerApi.Models;
 
 namespace SwaggerApi.DbContext
 {
@@ -10,6 +11,12 @@ namespace SwaggerApi.DbContext
         public  ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
         }
+
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<RestaurantModel> Restaurants { get; set; }
+        public DbSet<MenuModel> Menus { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ApplicationUser>(entity => entity.Property(m => m.NormalizedEmail).HasMaxLength(200));
